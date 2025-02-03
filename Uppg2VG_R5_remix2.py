@@ -12,6 +12,7 @@ from PIL import Image, ImageDraw, ImageOps
 import cv2
 import pandas as pd
 import time  # Lägg till import av time-modulen
+import matplotlib.pyplot as plt
 
 # Global camera variable
 camera = None
@@ -238,9 +239,9 @@ def process_image(image):
     """Förbehandla bilden för att passa modellen och gör en prediktion."""
     image = preprocess_image(np.array(image))
     st.write("Gör en prediktion...")
-    label, _ = predict_image(image)
+    label, probabilities = predict_image(image)
     st.write(f"Predikterade siffra: {label}" if label else "Inga siffror hittades.")
-
+    
 def upload_image():
     """Ladda upp en bild och gör en prediktion."""
     uploaded_file = st.file_uploader("Välj en bild...", type=["jpg", "png", "jpeg"])
